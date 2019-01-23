@@ -6,9 +6,8 @@ import {Link} from 'react-router-dom';
 // That way we don't have to define them all individually
 function ViewSearchBtn(props) {
   return (
-    // <div className="userBtn">
     <Link to= {props.to}>
-      <button type="button" className="btn view-btn" tabIndex="0">
+      <button type="button" className="btn custom-view-btn" tabIndex="0">
           View
       </button>
     </Link>

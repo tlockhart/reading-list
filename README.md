@@ -1,5 +1,5 @@
 <h1 align="center">Google Book Search</h1>
-<p align="center"><kbd><img src ="public/assets/images/spidey-click.png"/></kbd></p><br/>
+<p align="center"><kbd><img src ="./client/public/images/readinglist.png"/></kbd></p><br/>
 
 This project is a Google book search application.  It allows users to search the Google Books API by title, save books to a database, view book details, and preview the books.  
 
@@ -27,7 +27,11 @@ In order to run the app, you will need to clone this repository and install all 
 3. [Optional] In Bash, change the current directory to the reading-list directory and install create-react-app module using the following command:
     1. npm install -g create-react-app
 4. Next install all modules from the package.json, using the following command:
-    1. npm init [Enter]  
+    1. npm init [Enter] 
+5. Build the server.  Go to the root directory in BASH, type:
+    1. npm run build
+5. Build the client.  Go to the client directory in BASH, type:
+    1. npm run build
 # Execute Program
 1. In Bash, enter the following command in the reading-list directory, to start the server.
     1. npm start [ENTER]

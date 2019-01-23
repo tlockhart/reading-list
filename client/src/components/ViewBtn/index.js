@@ -5,8 +5,8 @@ import "./style.css";
 // That way we don't have to define them all individually
 function ViewBtn(props) {
   return (
-    <div className="userBtn">
-        <button type="button" className="btn view-btn" {...props} tabIndex="0">
+    <div className="user-btn">
+        <button type="button" className="btn custom-view-btn" {...props} tabIndex="0">
             View
         </button>
     </div>

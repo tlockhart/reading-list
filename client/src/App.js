@@ -4,6 +4,7 @@ import BooksContainer from "./pages/BooksContainer";
 import SavedContainer from "./pages/SavedContainer";
 import DetailContainer from "./pages/DetailContainer";
 import SearchDetailContainer from "./pages/SearchDetailContainer";
+// import CanvasContainer from "./pages/CanvasContainer";
 import NoMatchContainer from "./pages/NoMatchContainer";
 import Nav from "./components/Nav";
 import "./style.css";
@@ -23,6 +24,7 @@ class App extends React.Component{
             <Route exact path="/saved" component={SavedContainer} />
             <Route exact path="/books/:id" component={DetailContainer} />
             <Route exact path="/book/detail" component={SearchDetailContainer} />
+            {/* <Route exact path="/book/detail" component={CanvasContainer} /> */}
             <Route exact path="/books/search/:bookid" component={BooksContainer} />
             <Route component={NoMatchContainer} />
           </Switch>

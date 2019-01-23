@@ -14,12 +14,11 @@ class DetailContainer extends Component {
     API.getBook(this.props.match.params.id)
       .then(
         res => this.setState({ book: res.data }),
-        console.log("IN Details ID = "+this.props.match.params.id)
+        // console.log("IN Details ID = "+this.props.match.params.id)
         // console.log("Data = "+JSON.stringify(res))
       )
       .catch(err => console.log(err));
   }
-
   render() {
     return (
       <Container fluid>
@@ -34,7 +33,7 @@ class DetailContainer extends Component {
                   </h1>
                 </div>{/*col-12*/}
                 <div className="col-12">
-                  <img src={this.state.book.image} />
+                  <img className="img-fluid" src={this.state.book.image} />
                 </div>
                 <div className="col-12">
                   <Link to="/">&#x2190;Back to Search |</Link> 
@@ -46,21 +45,17 @@ class DetailContainer extends Component {
           </Col>
         </Row>
         <Row>
-          <Col size="md-10 md-offset-1">
-            <article>
-              <h1>Synopsis</h1>
-              <p>
-                {this.state.book.synopsis}
-              </p>
-            </article>
-          </Col>
+          <div className= "results">
+            <Col size="md-12">
+              <article>
+                <strong><h5>Synopsis</h5></strong>
+                <p>
+                  {this.state.book.synopsis}
+                </p>
+              </article>
+            </Col>
+          </div>
         </Row>
-        {/* <Row>
-          <Col size="md-2">
-            <Link to="/">&#x2190;Back to Search |</Link>
-            <a href={this.state.book.url} target="_blank"> Book &#x2192;</a>
-          </Col>
-        </Row> */}
       </Container>
     );
   }

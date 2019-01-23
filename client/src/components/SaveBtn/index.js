@@ -5,8 +5,8 @@ import "./style.css";
 // That way we don't have to define them all individually
 function SaveBtn(props) {
   return (
-    <div className="userBtn ml-1">
-      <button type="button" className="btn save-btn" {...props} tabIndex="0">
+    <div className="user-btn">
+      <button type="button" className="btn custom-save-btn" {...props} tabIndex="0">
         Save
     </button>
     </div>

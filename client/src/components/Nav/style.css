@@ -1,6 +1,13 @@
 .navbar {
     /* background-color: #3A55A4; */
-    background-color: #EB6864;
+    /* background-color: #EB6864; */
+    /* background-color:rgb(173,205,199); */
+    background: linear-gradient( rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.02) ), url(/images/stripes1.png); 
+    border: 1px solid #cecfd5;
+    background-size: 10% 100%;
+    background-repeat: repeat-x;
+    background-repeat: repeat-x;
+
     min-height: 70px;
     position: fixed;
     width: 100%;
@@ -30,7 +37,8 @@
 }
 
 .navbar ul li p{
-    color: black;
+    /* color: black; */
+    color:#AA3A39!important;
     display: inline;
 }
 
@@ -38,12 +46,13 @@ a:link {
     text-decoration: none;
   }
   
+
+
+  .navbar ul li .inactive p{
+    color: black!important;
+    /* */  
+}
 .navbar ul li p:hover { 
     /* color: #3A55A4; */
     color: #3D85B7!important;
   }
-
-.inactive p{
-    /* color: #EDED7F!important; */
-    color: #9D3635!important;
-}

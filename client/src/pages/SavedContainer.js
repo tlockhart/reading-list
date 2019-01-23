@@ -34,7 +34,7 @@ class SavedContainer extends Component {
     event.preventDefault();
     //Why can't I set the state:
     // this.setState({ book: book });
-    console.log("ID = "+id);
+    // console.log("ID = "+id);
     //console.log("BOOK = "+JSON.stringify(this.state.book));
     this.deleteBook(id);
     // this.loadBooks();
@@ -45,7 +45,7 @@ class SavedContainer extends Component {
      * Why can't I set the state:
      * ***********************************/
     this.setState({ id: _id });
-    console.log("BOOK ID = "+_id);
+    // console.log("BOOK ID = "+_id);
     //console.log("BOOK = "+JSON.stringify(this.state.book));
     //this.saveBook(book);
     
@@ -68,56 +68,59 @@ class SavedContainer extends Component {
         <Row>
           {/* DISPLAY RESULTS */}
           <Col size="md-12 sm-12">
-            <Jumbotron>
+            <Jumbotron className="w-100">
               <h1><h1>(React) Google Books Search</h1>
               <h4>View or Delete Saved Books</h4></h1>
             </Jumbotron>
-            {this.state.books.length ? (
-              <List>               
-                {this.state.books.map(book => (
-                  // <ListItem key={book._id}>
-                  <ListItem key={book._id}>
-                    {/* <Link to={"/saved/" + book._id}> */}
-                    <div className="container-fluid px-0">
-                    {/* <Link to={"/books/" + book.volumeInfo.previewLink}> */}
-                      <div className ="row">
-                        <div className = "col-12">
-                          <div className = "row">
-                            <div className ="col-5">
-                              <strong>
-                                <p>{book.title} </p> 
-                                <p>Written by {book.author}</p>
-                              </strong>
-                            </div>{/*<!--col-5-->*/}
-                            <div className="col-3"></div>
-                            <div className = "col-4 justify-self-end text-right">
-                              <ViewBtn onClick={(event) => this.viewClickHandler(event, book._id)} />
-                              {/* <SaveBtn onClick={() => this.saveBook(book.id)} /> */}
-                              <DeleteBtn onClick={(event) => {
-                                this.deleteClickHandler(event, book._id)}
-                                // }))} 
-                              }/>
-                            </div>{/*col-4*/}
-                          </div>{/*<!--row-->*/}
-                          <div className="row">
-                          <div className = "col-2">
-                            <img src= {book.image ?book.image: "https://dummyimage.com/128x195/fff/fff&text=No+Image+Available"}></img>
-                          </div>{/*col-4*/}
-                          <div className = "col-10">
-                            <p>{book.synopsis}</p>
-                          </div>
-                          </div>
-                        </div>{/*<!--col-12-->*/}
-                      </div>{/*<!--row-->*/}
-                    {/* </Link> */}
-                    </div>{/*container*/}
-                  </ListItem>
-                ))}
-              </List>
-             ) : (
-              <h3>No Results to Display</h3>
-            )} 
-          </Col>
+            {/*Results*/}
+           </Col>
+          <div className = "results">
+            <Col size="md-12 sm-12">
+              {this.state.books.length ? (
+                  <React.Fragment>
+                    <strong><h5>Saved Books</h5></strong>
+                    <List>               
+                      {this.state.books.map(book => (
+                        <ListItem key={book._id}>
+                          <div className="container-fluid px-0">
+                            <div className ="row">
+                              <div className = "col-12">
+                                <div className = "row">
+                                  <div className ="col-12">
+                                  <span className = "justify-self-end text-right button-wrapper">
+                                    <ViewBtn onClick={(event) => this.viewClickHandler(event, book._id)} />
+
+                                    <DeleteBtn onClick={(event) => {
+                                      this.deleteClickHandler(event, book._id)}
+                                    }/>
+                                  </span>
+                                  <div className ="justify-self-start text-left title-author"></div>
+                                    <strong>
+                                      <p>{book.title} </p> 
+                                      <p>Written by {book.author}</p>
+                                    </strong>
+                                  </div>{/*<!--col-5-->*/}
+                                </div>{/*<!--row-->*/}
+                                <div className="row">
+                                <div className = "col-12">
+                                  <img className="img-fluid book-img" src= {book.image ?book.image: "https://dummyimage.com/128x195/fff/fff&text=No+Image+Available"}></img>
+                                  <p className="book-text text-align-left">
+                                    {book.synopsis}
+                                  </p>
+                                </div>
+                                </div>
+                              </div>{/*<!--col-12-->*/}
+                            </div>{/*<!--row-->*/}
+                          </div>{/*container*/}
+                        </ListItem>
+                      ))}
+                    </List>
+                  </React.Fragment>
+                ) : (
+                  <h3>No Results to Display</h3>
+                )} 
+            </Col>
+          </div>
         </Row>
       </Container>
     );

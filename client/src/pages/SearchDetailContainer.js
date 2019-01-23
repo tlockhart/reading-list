@@ -28,7 +28,7 @@ class SearchDetailContainer extends Component {
       bookId,
       synopsis
     }});
-    console.log("IN SEARCHDETAILS book = "+this.state.book.title);
+    // console.log("IN SEARCHDETAILS book = "+this.state.book.title);
     // API.getBook(this.props.match.params.id)
     //   .then(
     //     res => this.setState({ book: res.data }),
@@ -52,7 +52,7 @@ class SearchDetailContainer extends Component {
                   </h1>
                 </div>{/*col-12*/}
                 <div className="col-12">
-                  <img src={this.state.book.image} />
+                  <img className="img-fluid" src={this.state.book.image} />
                 </div>
                 <div className="col-12">
                   <Link to="/">&#x2190;Back to Search |</Link> 
@@ -64,14 +64,16 @@ class SearchDetailContainer extends Component {
           </Col>
         </Row>
          <Row>
-           <Col size="md-10 md-offset-1">
-             <article>
-               <h1>Synopsis</h1>
-              <p>
-                 {this.state.book.synopsis}
-               </p>
-             </article>
-           </Col>
+           <div className= "results">
+            <Col size="md-12">
+              <article>
+                <strong><h5>Synopsis</h5></strong>
+                <p>
+                  {this.state.book.synopsis}
+                </p>
+              </article>
+            </Col>
+           </div>
          </Row>
          {/* <Row>
            <Col size="md-2">

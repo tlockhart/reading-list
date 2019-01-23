@@ -16,13 +16,13 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    console.log("CONTROLLER = "+JSON.stringify(req.body));
-    console.log("CONTROLLER = "+req.body.bookId);
+    // console.log("CONTROLLER = "+JSON.stringify(req.body));
+    // console.log("CONTROLLER = "+req.body.bookId);
     db.Book.find({"bookId": req.body.bookId})
     .then(function(doc){
       if(doc.length > 0)
       {
-        console.log("book already in db");
+        // console.log("book already in db");
       }
       else{
         console.log("book NOT already in db");
