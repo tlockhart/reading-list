@@ -16,10 +16,25 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Book
-      .create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+    console.log("CONTROLLER = "+JSON.stringify(req.body));
+    console.log("CONTROLLER = "+req.body.bookId);
+    db.Book.find({"bookId": req.body.bookId})
+    .then(function(doc){
+      if(doc.length > 0)
+      {
+        console.log("book already in db");
+      }
+      else{
+        console.log("book NOT already in db");
+        db.Book
+          .create(req.body)
+          .then(dbModel => res.json(dbModel))
+          .catch(err => res.status(422).json(err));
+      }//else
+    })//then
+    .catch(function(error){
+      //console.log(error);
+    })
   },
   update: function(req, res) {
     db.Book
