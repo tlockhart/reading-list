@@ -1,8 +1,8 @@
-body { padding-top: 100px !important;}
+body { padding-top: 110px !important;}
 
 @font-face {
     font-family: blkchcry;
-    src: url(/fonts/BLKCHCRY.ttf);
+    src: url(/fonts/BLKCHCRY.TTF);
 }
 h1{
     font-family: blkchcry;
@@ -106,21 +106,38 @@ h5 {
     background-color: white;
     box-shadow: #ededda;
   }
+  @media (hover: none) {
+    .custom-navbar ul li p:hover { color: black; }
+}
 @media (min-width:150px) and (max-width: 767px){
-    body { padding-top: 200px !important; 
-    min-width:360px;}
+    body { 
+        padding-top: 100px !important; 
+        min-width:360px;
+    }
     .header {
         min-height:100%!important;
         min-width:100%!important;
     }
-    .navbar li {
+    .custom-navbar li {
         padding-top: 0;
     } 
+    /* .custom-navbar ul li p{
+        display:inline;
+    } */
     @media (max-width:598px){
         .user-btn{
             display:block;
             margin-left:0;
             margin-top:.25rem;
+        }   
+    }
+    @media (max-width:375px){
+        body { 
+            padding-top: 245px !important; 
+            min-width:360px;
+        }
+        .custom-navbar ul li p{
+            display: block;
         }
     }
 }

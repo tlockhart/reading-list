@@ -4,24 +4,24 @@ import "./style.css";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-md navbar-dark fixed-top text-center">
-      <ul className="navbar-nav">
-          <li className="brand nav-item">
+    <nav className="custom-navbar navbar-expand-md navbar-dark fixed-top">
+      <ul className="custom-navbar-nav">
+          <li className="brand custom-nav-item">
             <Link 
-              to="/" className={window.location.pathname === "/" ? "nav-link active" : "nav-link inactive"}>
+              to="/" className={window.location.pathname === "/" ? "custom-nav-link active" : "custom-nav-link inactive"}>
               <p className="icon">Google Books Search</p>
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="custom-nav-item">
             <Link 
-              to="/" className={window.location.pathname === "/" ? "nav-link active" : "nav-link inactive"}>
+              to="/" className={window.location.pathname === "/" ? "custom-nav-link active" : "custom-nav-link inactive"}>
               <p className="icon">Search</p>
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="custom-nav-item">
             <Link 
               to="/saved" 
-              className={window.location.pathname === "/saved" ? "nav-link active" : "nav-link inactive"}>
+              className={window.location.pathname === "/saved" ? "custom-nav-link active" : "custom-nav-link inactive"}>
                 <p className="icon">Saved</p>
             </Link>
           </li>
