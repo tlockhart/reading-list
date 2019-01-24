@@ -92,13 +92,12 @@ class BooksContainer extends Component {
     //console.log("BOOK = "+JSON.stringify(this.state.book));
     this.saveBook(book);
   };
-  viewClickHandler = (event, url) => {
-    event.preventDefault();
-    this.setState({ url: url });
-    // console.log("BOOK url = "+url);
-    //console.log("BOOK = "+JSON.stringify(this.state.book));
-    window.open(url);
-  };
+  // viewClickHandler = (event, url) => {
+  //   event.preventDefault();
+  //   this.setState({ url: url });
+  //   console.log("BOOK url = "+url);
+  //   window.open(url);
+  // };
 
   render() {
     return (
@@ -115,7 +114,7 @@ class BooksContainer extends Component {
                 <Col size="md-12">
                   <form>
                     <strong><h5>Book Search</h5></strong>
-                    <label for="title"><p>Book</p></label>
+                    <label htmlFor="title"><p>Book</p></label>
                     <Input
                       className="custom-form-control"
                       type="text"

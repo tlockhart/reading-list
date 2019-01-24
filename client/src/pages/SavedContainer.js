@@ -69,8 +69,8 @@ class SavedContainer extends Component {
           {/* DISPLAY RESULTS */}
           <Col size="md-12 sm-12">
             <Jumbotron className="w-100">
-              <h1><h1>(React) Google Books Search</h1>
-              <h4>View or Delete Saved Books</h4></h1>
+              <h1 className="title">(React) Google Books Search</h1>
+              <h4>View or Delete Saved Books</h4>
             </Jumbotron>
             {/*Results*/}
            </Col>
@@ -88,8 +88,12 @@ class SavedContainer extends Component {
                                 <div className = "row">
                                   <div className ="col-12">
                                   <span className = "justify-self-end text-right button-wrapper">
-                                    <ViewBtn onClick={(event) => this.viewClickHandler(event, book._id)} />
-
+                                    {/* <ViewBtn onClick={(event) => this.viewClickHandler(event, book._id)} /> */}
+                                    <ViewBtn to={
+                                      {
+                                        pathname: '/books/'+`${book._id}`
+                                      } 
+                                    }/>
                                     <DeleteBtn onClick={(event) => {
                                       this.deleteClickHandler(event, book._id)}
                                     }/>

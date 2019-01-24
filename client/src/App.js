@@ -6,7 +6,7 @@ import DetailContainer from "./pages/DetailContainer";
 import SearchDetailContainer from "./pages/SearchDetailContainer";
 // import CanvasContainer from "./pages/CanvasContainer";
 import NoMatchContainer from "./pages/NoMatchContainer";
-import Nav from "./components/Nav";
+import Header from "./components/Header";
 import "./style.css";
 
 //Create a Router and declare individual routes
@@ -16,7 +16,7 @@ class App extends React.Component{
       <Router>
         {/* Router must have one and only one child tag */}
         <div>
-          <Nav />
+          <Header />
           <Switch>
             {/* Route just registers which component should displayed depending on the url path*/}
             <Route exact path="/" component={BooksContainer} />

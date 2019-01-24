@@ -47,7 +47,7 @@ class SearchDetailContainer extends Component {
             <div className="container">
               <div className="row">
                 <div className="col-12">
-                  <h1>
+                  <h1 className="title">
                     {this.state.book.title} by {this.state.book.author}
                   </h1>
                 </div>{/*col-12*/}

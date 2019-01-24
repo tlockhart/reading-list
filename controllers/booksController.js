@@ -25,7 +25,7 @@ module.exports = {
         // console.log("book already in db");
       }
       else{
-        console.log("book NOT already in db");
+        //console.log("book NOT already in db");
         db.Book
           .create(req.body)
           .then(dbModel => res.json(dbModel))

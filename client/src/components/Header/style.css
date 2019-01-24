@@ -1,0 +1,26 @@
+nav {
+    /* font-size: 0; */
+    margin-bottom: 2rem;
+  }
+
+a:link {
+    text-decoration: none;
+  }
+
+nav ul li p{
+    /* color: black; */
+    color:#AA3A39!important;
+    display: inline;
+    margin:0!important;
+}
+
+.navbar ul li .inactive p{
+    color: black!important; 
+}
+.navbar{
+    background: linear-gradient( rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.02) ), url(/images/stripes1.png); 
+    border: 1px solid #cecfd5;
+    background-size: 10% 100%;
+    background-repeat: repeat-x;
+    background-repeat: repeat-x;
+}
