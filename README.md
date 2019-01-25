@@ -27,11 +27,7 @@ In order to run the app, you will need to clone this repository and install all 
 3. [Optional] In Bash, change the current directory to the reading-list directory and install create-react-app module using the following command:
     1. npm install -g create-react-app
 4. Next install all modules from the package.json, using the following command:
-    1. npm init [Enter] 
-5. Build the server.  Go to the root directory in BASH, type:
-    1. npm run build
-5. Build the client.  Go to the client directory in BASH, type:
-    1. npm run build
+    1. npm install [Enter] 
 # Execute Program
 1. In Bash, enter the following command in the reading-list directory, to start the server.
     1. npm start [ENTER]

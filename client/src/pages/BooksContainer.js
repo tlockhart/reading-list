@@ -135,7 +135,7 @@ class BooksContainer extends Component {
           {/* DISPLAY RESULTS */}
           <div className = "results">
             <Col size="md-12 sm-12">
-              {this.state.books.length ? (
+              {this.state.books && this.state.books.length ? (
                 <React.Fragment>
                   <strong><h5>Results</h5></strong>
                   <List>               
