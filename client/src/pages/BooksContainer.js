@@ -7,19 +7,27 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
+import UniqueId from 'react-html-id';
 // import { realpathSync } from "fs";
 
 class BooksContainer extends Component {
-  state = {
-    books: [],
-    book: {},
-    id: "",
-    title: "",
-    author: "",
-    synopsis: "",
-    url: "",
-    data: {}
-  };
+  constructor(){
+    super();
+    UniqueId.enableUniqueIds(this);
+    this.state = {
+      books: [],
+      book: {},
+      key: this.nextUniqueId(),
+      id: "",
+      title: "",
+      author: "",
+      synopsis: "",
+      url: "",
+      data: {}
+    };
+    // console.log(this.state);
+  }
+    
 
   //Store state variables after api cll returns
   callback = (res) => {
@@ -140,7 +148,8 @@ class BooksContainer extends Component {
                   <strong><h5>Results</h5></strong>
                   <List>               
                     {this.state.books.map(book => (
-                      <ListItem key={book.id}>
+                      // <ListItem key={book.id}>
+                      <ListItem key = {book.key}>
                         <div className="container-fluid px-0">
                           <div className ="row">
                             <div className = "col-12">
@@ -156,8 +165,8 @@ class BooksContainer extends Component {
                                           title: book.volumeInfo.title,
                                           bookId: book.id,
                                           author: book.volumeInfo.authors,
-                                          synopsis: book.volumeInfo.description,
-                                          isbn: book.volumeInfo.industryIdentifiers[0].type
+                                          synopsis: book.volumeInfo.description
+                                          // isbn: book.volumeInfo.industryIdentifiers[0].type
                                         }
                                       }
                                     }>View</ViewSearchBtn>
@@ -165,7 +174,8 @@ class BooksContainer extends Component {
                                   <SaveBtn onClick={(event) => {
                                     this.saveClickHandler(event, ({
                                       url: book.volumeInfo.previewLink,
-                                      image: book.volumeInfo.imageLinks.thumbnail,
+                                      //image: book.volumeInfo.imageLinks.thumbnail,
+                                      image: book.volumeInfo.imageLinks ?book.volumeInfo.imageLinks.thumbnail: "https://dummyimage.com/128x195/fff/fff&text=No+Image+Available",
                                       title: book.volumeInfo.title,
                                       bookId: book.id,
                                       author: book.volumeInfo.authors,
