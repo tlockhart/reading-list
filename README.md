@@ -11,6 +11,8 @@ In order to run the app, you will need to clone this repository and install all 
 1. [Node.js LTS](https://nodejs.org/en/)<br/>
 2. [NPM](https://www.npmjs.com/get-npm)<br/>
 3. [Git & Git Bash](https://git-scm.com/downloads)<br/>
+4. [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)<br/>
+5. [Robo 3T](https://robomongo.org/download)<br/>
 
 # NPM Modules Used
 1. react
