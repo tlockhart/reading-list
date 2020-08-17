@@ -26,16 +26,16 @@ class BooksContainer extends Component {
       data: {}
     };
     // console.log(this.state);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFormSearch = this.handleFormSearch.bind(this);
-    this.callback = this.callback.bind(this);
-    this.saveClickHandler = this.saveClickHandler.bind(this);
-    this.saveBook = this.saveBook.bind(this);
+    // this.handleInputChange = this.handleInputChange.bind(this);
+    // this.handleFormSearch = this.handleFormSearch.bind(this);
+    // this.callback = this.callback.bind(this);
+    // this.saveClickHandler = this.saveClickHandler.bind(this);
+    // this.saveBook = this.saveBook.bind(this);
   }
     
 
   //Store state variables after api cll returns
-  callback(res){
+  callback=(res)=>{
     // console.log();
     // console.log("API CALL HAS ENDED!");
     // console.log();
@@ -49,7 +49,7 @@ class BooksContainer extends Component {
     // console.log("RES DATA ITEMS BOOKS = "+JSON.stringify(this.state.books),"ID = "+this.state.id, "TITLE = "+this.state.title, "AUTHOR = "+this.state.author, "DESCRIP = "+this.state.synopsis);
   }
   //Initialize the state variables with search results
-  searchBooks(query, cb){
+  searchBooks=(query, cb)=>{
     API.search(query)
       .then(res => {
         // console.log("API CALL HAS STARTED!");
@@ -60,7 +60,7 @@ class BooksContainer extends Component {
   }
 
   //GETS WHAT IS LOADED IN THE DB (THIS SHOULD BE CALLED ON VIEW)
-  loadBooks(){
+  loadBooks=()=>{
     API.getBooks()
       .then(res =>
         this.setState({ books: res.data, title: "", author: "", synopsis: "" })
@@ -69,7 +69,7 @@ class BooksContainer extends Component {
   }
 
 // Saves a book to the database
-  saveBook(bookData){
+  saveBook=(bookData)=>{
     var filteredData;
       API.saveBook(bookData)
       .then(
@@ -81,7 +81,7 @@ class BooksContainer extends Component {
         ).catch(err => console.log("ERROR", err));
   }
 
-  handleInputChange(event){
+  handleInputChange=(event)=>{
     const { name, value } = event.target;
     this.setState({
       //search : input field
@@ -89,7 +89,7 @@ class BooksContainer extends Component {
     });
   }
 
-  handleFormSearch(event){
+  handleFormSearch=(event)=>{
     if (this.state.title){
       event.preventDefault();
       //Search for all books in Google Books API
@@ -97,7 +97,7 @@ class BooksContainer extends Component {
     }//if
   }
 
-  saveClickHandler(event, book){
+  saveClickHandler=(event, book)=>{
     event.preventDefault();
     //Why can't I set the state:
     this.setState({ book: book });
