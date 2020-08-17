@@ -29,6 +29,7 @@ class BooksContainer extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSearch = this.handleFormSearch.bind(this);
     this.callback = this.callback.bind(this);
+    this.saveClickHandler = this.saveClickHandler.bind(this);
   }
     
 
