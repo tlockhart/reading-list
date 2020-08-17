@@ -30,6 +30,7 @@ class BooksContainer extends Component {
     this.handleFormSearch = this.handleFormSearch.bind(this);
     this.callback = this.callback.bind(this);
     this.saveClickHandler = this.saveClickHandler.bind(this);
+    this.saveBook = this.saveBook.bind(this);
   }
     
 
@@ -75,10 +76,9 @@ class BooksContainer extends Component {
         // console.log("BOOKDATA", bookData),
         // console.log("TEST"),
         //FILTER OUT THE DATA THAT HAS BEEN SAVED TO THE DATABASE
-        filteredData = this.state.books.filter(eachItem =>eachItem.id != bookData.bookId),
+        filteredData = this.state.books.filter((eachItem)=>eachItem.id != bookData.bookId),
         this.setState({books: filteredData})
-        )
-      .catch(err => console.log("ERROR", err));
+        ).catch(err => console.log("ERROR", err));
   }
 
   handleInputChange(event){
