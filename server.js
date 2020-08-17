@@ -1,3 +1,8 @@
+// Dependencies
+/*************************/
+// import dotenv
+require("dotenv").config();
+
 const express = require("express");
 
 const mongoose = require("mongoose");
@@ -17,9 +22,17 @@ app.use(routes);
 
 // Connect to the Mongo DB
 // mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://admin:admin@localhost:27017/reactreadinglist");
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
 
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://admin:admin@localhost:27017/reactreadinglist");
+mongoose.connect(
+  process.env.MONGODB_URI,
+  {
+      useCreateIndex: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+  }
+);
 // Define API routes here
 
 // Send every other request to the React app
