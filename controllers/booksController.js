@@ -17,7 +17,8 @@ module.exports = {
   },
   create: function(req, res) {
     // console.log("CONTROLLER = "+JSON.stringify(req.body));
-    // console.log("CONTROLLER = "+req.body.bookId);
+    console.log("In create = "+req.body.bookId);
+    // console.log ("in remove");
     db.Book.find({"bookId": req.body.bookId})
     .then(function(doc){
       if(doc.length > 0)
@@ -43,6 +44,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
+    console.log ("in remove");
     db.Book
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
