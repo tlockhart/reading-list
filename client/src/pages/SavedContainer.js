@@ -22,15 +22,15 @@ class SavedContainer extends Component {
     this.loadBooks();
   }
 
-  loadBooks = () => {
+  loadBooks(){
     API.getBooks()
       .then(res =>
         this.setState({ books: res.data, title: "", author: "", synopsis: "" })
       )
       .catch(err => console.log(err));
-  };
+  }
 
-  deleteClickHandler = (event, id) => {
+  deleteClickHandler(event, id){
     event.preventDefault();
     //Why can't I set the state:
     // this.setState({ book: book });
@@ -38,8 +38,9 @@ class SavedContainer extends Component {
     //console.log("BOOK = "+JSON.stringify(this.state.book));
     this.deleteBook(id);
     // this.loadBooks();
-  };
-  viewClickHandler = (event, _id) => {
+  }
+
+  viewClickHandler(event, _id){
     event.preventDefault();
     /*************************************
      * Why can't I set the state:
@@ -54,13 +55,13 @@ class SavedContainer extends Component {
      * ******************************************/
     // window.open("/books/"+this.state.id);
     window.open("/books/"+_id);
-  };
+  }
 
-  deleteBook = id => {
+  deleteBook(id){
     API.deleteBook(id)
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
-  };
+  }
 
   render() {
     return (
