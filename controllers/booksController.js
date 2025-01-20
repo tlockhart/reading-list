@@ -46,7 +46,7 @@ module.exports = {
   remove: function(req, res) {
     console.log ("in remove id:", req.params.id);
     db.Book
-        .findById({ _id: id })
+        .findById({ _id: req.params.id })
         .then(dbModel => {
             if (!dbModel) {
                 return res.status(404).json({ error: "Book not found" });
