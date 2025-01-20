@@ -46,9 +46,16 @@ module.exports = {
   remove: function(req, res) {
     console.log ("in remove id:", req.params.id);
     db.Book
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  }
+        .findById({ _id: id })
+        .then(dbModel => {
+            if (!dbModel) {
+                return res.status(404).json({ error: "Book not found" });
+            }
+            return dbModel.remove();
+        })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => {
+            console.error("Error in remove function:", err);
+            res.status(422).json(err);
+        })}
 };
