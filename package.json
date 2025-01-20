@@ -1,5 +1,5 @@
 {
-  "name": "mern",
+  "name": "reading-list-backend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -10,8 +10,7 @@
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "build": "cd client && npm run build"
   },
   "author": "",
   "license": "ISC",
