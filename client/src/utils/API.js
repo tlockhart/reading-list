@@ -8,7 +8,7 @@ export default {
     },
 
     getBooks: async function(id) {
-        const response = await fetch("/api/books");
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/books`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -16,7 +16,7 @@ export default {
     },
 
     getBook: async function(id) {
-        const response = await fetch("/api/books/" + id);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/books/${id}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -24,7 +24,7 @@ export default {
     },
 
     deleteBook: async function(id) {
-        const response = await fetch("/api/books/" + id, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/books/${id}`, {
             method: 'DELETE',
         });
         if (!response.ok) {
@@ -36,7 +36,7 @@ export default {
     saveBook: async function(bookData) {
         console.log("BookData0:", bookData)
 
-        const response = await fetch("/api/books", {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/books`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
