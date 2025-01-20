@@ -6,10 +6,7 @@ const connectDB = async () => {
     // mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
     const connectionString = process.env.MONGODB_URI || "mongodb://localhost:27017/reactreadinglist";
 
-    const conn = await mongoose.connect(connectionString, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const conn = await mongoose.connect(connectionString);
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {

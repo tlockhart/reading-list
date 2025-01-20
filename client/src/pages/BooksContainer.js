@@ -76,10 +76,11 @@ class BooksContainer extends Component {
   };
 
   saveBook = (bookData) => {
-    console.log("BookData1:", bookData)
+    console.log("BookData1:", bookData);
     API.saveBook(bookData)
-      .then(() => {
-        console.log("BookData2:", bookData)
+      .then((res) => {
+        console.log("API saveBook response:", res);
+        // Check if res is not empty or malformed
         const filteredData = this.state.books.filter(
           (eachItem) => eachItem.id !== bookData.bookId
         );
@@ -88,13 +89,14 @@ class BooksContainer extends Component {
           error: null
         });
       })
-      .catch(err => {
-        console.error('Save book error:', err);
-        this.setState({ 
-          error: "Error saving book" 
+      .catch((err) => {
+        console.error("Save book error:", err);
+        this.setState({
+          error: "Error saving book"
         });
       });
-  }
+  };
+  
 
   handleInputChange=(event)=>{
     const { name, value } = event.target;
