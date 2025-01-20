@@ -4,19 +4,23 @@
 require("dotenv").config();
 
 const express = require("express");
-
+const cors= require("cors");
 const mongoose = require("mongoose");
-const connectDB = require("./config/database");
+const client = require("./config/database");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Connect to Database
-connectDB();
+// Connect the client to the server
+client();
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Apply Cors middleware to allow requests from all origins
+app.use(cors())
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
