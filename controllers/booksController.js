@@ -1,61 +1,141 @@
 const db = require("../models");
 
-// Defining methods for the booksController
 module.exports = {
-  findAll: function(req, res) {
-    db.Book
-      .find(req.query)
-      .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  findById: function(req, res) {
-    db.Book
-      .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  create: function(req, res) {
-    console.log("CONTROLLER = "+JSON.stringify(req.body));
-    console.log("In create = "+req.body.bookId);
-    // console.log ("in remove");
-    db.Book.find({"bookId": req.body.bookId})
-    .then(function(doc){
-      if(doc.length > 0)
-      {
-        console.log("book already in db");
-      }
-      else{
-        console.log("book NOT already in db");
-        db.Book
-          .create(req.body)
-          .then(dbModel => res.json(dbModel))
-          .catch(err => res.status(422).json(err));
-      }//else
-    })//then
-    .catch(function(error){
-      //console.log(error);
-    })
-  },
-  update: function(req, res) {
-    db.Book
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  remove: function(req, res) {
-    console.log ("in remove id:", req.params.id);
-    db.Book
-        .findById({ _id: req.params.id })
-        .then(dbModel => {
+    findAll: async function(req, res) {
+        try {
+            const dbModel = await db.Book
+                .find(req.query)
+                .sort({ date: -1 })
+                .exec();
+            
+            res.json({
+                success: true,
+                data: dbModel
+            });
+        } catch (err) {
+            console.error("Error in findAll:", err);
+            res.status(422).json({
+                success: false,
+                error: err.message || "Error fetching books"
+            });
+        }
+    },
+
+    findById: async function(req, res) {
+        try {
+            const dbModel = await db.Book
+                .findById(req.params.id)
+                .exec();
+            
             if (!dbModel) {
-                return res.status(404).json({ error: "Book not found" });
+                return res.status(404).json({
+                    success: false,
+                    error: "Book not found"
+                });
             }
-            return dbModel.remove();
-        })
-        .then(dbModel => res.json(dbModel))
-        .catch(err => {
-            console.error("Error in remove function:", err);
-            res.status(422).json(err);
-        })}
+
+            res.json({
+                success: true,
+                data: dbModel
+            });
+        } catch (err) {
+            console.error("Error in findById:", err);
+            res.status(422).json({
+                success: false,
+                error: err.message || "Error fetching book"
+            });
+        }
+    },
+
+    create: async function(req, res) {
+        try {
+            console.log("CONTROLLER = " + JSON.stringify(req.body));
+            console.log("In create = " + req.body.bookId);
+
+            const existingBook = await db.Book
+                .findOne({ bookId: req.body.bookId })
+                .exec();
+
+            if (existingBook) {
+                console.log("book already in db");
+                return res.status(409).json({
+                    success: false,
+                    error: "Book already exists"
+                });
+            }
+
+            console.log("book NOT already in db");
+            const dbModel = await db.Book.create(req.body);
+            
+            res.status(201).json({
+                success: true,
+                data: dbModel
+            });
+        } catch (err) {
+            console.error("Error in create:", err);
+            res.status(422).json({
+                success: false,
+                error: err.message || "Error creating book"
+            });
+        }
+    },
+
+    update: async function(req, res) {
+        try {
+            const dbModel = await db.Book
+                .findByIdAndUpdate(
+                    req.params.id,
+                    req.body,
+                    { new: true, runValidators: true }
+                )
+                .exec();
+
+            if (!dbModel) {
+                return res.status(404).json({
+                    success: false,
+                    error: "Book not found"
+                });
+            }
+
+            res.json({
+                success: true,
+                data: dbModel
+            });
+        } catch (err) {
+            console.error("Error in update:", err);
+            res.status(422).json({
+                success: false,
+                error: err.message || "Error updating book"
+            });
+        }
+    },
+
+    remove: async function(req, res) {
+        try {
+            console.log("in remove id:", req.params.id);
+            
+            const dbModel = await db.Book
+                .findByIdAndDelete(req.params.id)
+                .exec();
+
+            if (!dbModel) {
+                return res.status(404).json({
+                    success: false,
+                    error: "Book not found"
+                });
+            }
+
+            res.json({
+                success: true,
+                message: "Book successfully deleted",
+                data: dbModel
+            });
+        } catch (err) {
+            console.error("Error in remove:", err);
+            res.status(422).json({
+                success: false,
+                error: err.message || "Error deleting book"
+            });
+        }
+    }
 };
