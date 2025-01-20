@@ -6,13 +6,18 @@ require("dotenv").config();
 const express = require("express");
 
 const mongoose = require("mongoose");
+const connectDB = require("./config/database");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Connect to Database
+connectDB();
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -20,19 +25,7 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
-// Connect to the Mongo DB
-// mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://admin:admin@localhost:27017/reactreadinglist");
-// mongoose.connect(
-//   process.env.MONGODB_URI,
-//   {
-//       useCreateIndex: true,
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true
-//   }
-// );
 // Define API routes here
 
 // Send every other request to the React app

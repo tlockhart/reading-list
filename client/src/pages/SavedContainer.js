@@ -15,22 +15,24 @@ class SavedContainer extends Component {
     title: "",
     author: "",
     synopsis: "",
-    id: ""
+    id: "",
   };
 
   componentDidMount() {
     this.loadBooks();
   }
 
-  loadBooks=()=>{
+  loadBooks = () => {
     API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-      )
-      .catch(err => console.log(err));
-  }
+      .then((res) => {
+        console.log("Res:", res)
+        this.setState({ books: res, title: "", author: "", synopsis: "" });
+        return;
+      })
+      .catch((err) => console.log(err));
+  };
 
-  deleteClickHandler=(event, id)=>{
+  deleteClickHandler = (event, id) => {
     event.preventDefault();
     //Why can't I set the state:
     // this.setState({ book: book });
@@ -38,9 +40,9 @@ class SavedContainer extends Component {
     //console.log("BOOK = "+JSON.stringify(this.state.book));
     this.deleteBook(id);
     // this.loadBooks();
-  }
+  };
 
-  viewClickHandler=(event, _id)=>{
+  viewClickHandler = (event, _id) => {
     event.preventDefault();
     /*************************************
      * Why can't I set the state:
@@ -49,19 +51,19 @@ class SavedContainer extends Component {
     // console.log("BOOK ID = "+_id);
     //console.log("BOOK = "+JSON.stringify(this.state.book));
     //this.saveBook(book);
-    
+
     /*******************************************
      * Why can't I reference the state variable?
      * ******************************************/
     // window.open("/books/"+this.state.id);
-    window.open("/books/"+_id);
-  }
+    window.open("/books/" + _id);
+  };
 
-  deleteBook=(id)=>{
+  deleteBook = (id) => {
     API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
-  }
+      .then((res) => this.loadBooks())
+      .catch((err) => console.log(err));
+  };
 
   render() {
     return (
@@ -74,56 +76,75 @@ class SavedContainer extends Component {
               <h4>View or Delete Saved Books</h4>
             </Jumbotron>
             {/*Results*/}
-           </Col>
-          <div className = "results">
+          </Col>
+          <div className="results">
             <Col size="md-12 sm-12">
               {this.state.books.length ? (
-                  <React.Fragment>
-                    <strong><h5>Saved Books</h5></strong>
-                    <List>               
-                      {this.state.books.map(book => (
-                        <ListItem key={book._id}>
-                          <div className="container-fluid px-0">
-                            <div className ="row">
-                              <div className = "col-12">
-                                <div className = "row">
-                                  <div className ="col-12">
-                                  <span className = "justify-self-end text-right button-wrapper">
+                <React.Fragment>
+                  <strong>
+                    <h5>Saved Books</h5>
+                  </strong>
+                  <List>
+                    {this.state.books.map((book) => (
+                      <ListItem key={book._id}>
+                        <div className="container-fluid px-0">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="row">
+                                <div className="col-12">
+                                  <span className="justify-self-end text-right button-wrapper">
                                     {/* <ViewBtn onClick={(event) => this.viewClickHandler(event, book._id)} /> */}
-                                    <ViewBtn to={
-                                      {
-                                        pathname: '/books/'+`${book._id}`
-                                      } 
-                                    }/>
-                                    <DeleteBtn onClick={(event) => {
-                                      this.deleteClickHandler(event, book._id)}
-                                    }/>
+                                    <ViewBtn
+                                      to={{
+                                        pathname: "/books/" + `${book._id}`,
+                                      }}
+                                    />
+                                    <DeleteBtn
+                                      onClick={(event) => {
+                                        this.deleteClickHandler(
+                                          event,
+                                          book._id
+                                        );
+                                      }}
+                                    />
                                   </span>
-                                  <div className ="justify-self-start text-left title-author"></div>
-                                    <strong>
-                                      <p>{book.title} </p> 
-                                      <p>Written by {book.author}</p>
-                                    </strong>
-                                  </div>{/*<!--col-5-->*/}
-                                </div>{/*<!--row-->*/}
-                                <div className="row">
-                                <div className = "col-12">
-                                  <img className="img-fluid book-img" src= {book.image ?book.image: "https://dummyimage.com/128x195/fff/fff&text=No+Image+Available"}></img>
+                                  <div className="justify-self-start text-left title-author" />
+                                  <strong>
+                                    <p>{book.title} </p>
+                                    <p>Written by {book.author}</p>
+                                  </strong>
+                                </div>
+                                {/*<!--col-5-->*/}
+                              </div>
+                              {/*<!--row-->*/}
+                              <div className="row">
+                                <div className="col-12">
+                                  <img
+                                    className="img-fluid book-img"
+                                    src={
+                                      book.image
+                                        ? book.image
+                                        : "https://dummyimage.com/128x195/fff/fff&text=No+Image+Available"
+                                    }
+                                  />
                                   <p className="book-text text-align-left">
                                     {book.synopsis}
                                   </p>
                                 </div>
-                                </div>
-                              </div>{/*<!--col-12-->*/}
-                            </div>{/*<!--row-->*/}
-                          </div>{/*container*/}
-                        </ListItem>
-                      ))}
-                    </List>
-                  </React.Fragment>
-                ) : (
-                  <h3>No Results to Display</h3>
-                )} 
+                              </div>
+                            </div>
+                            {/*<!--col-12-->*/}
+                          </div>
+                          {/*<!--row-->*/}
+                        </div>
+                        {/*container*/}
+                      </ListItem>
+                    ))}
+                  </List>
+                </React.Fragment>
+              ) : (
+                <h3>No Results to Display</h3>
+              )}
             </Col>
           </div>
         </Row>

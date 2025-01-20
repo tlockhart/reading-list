@@ -11,7 +11,7 @@ import UniqueId from 'react-html-id';
 // import { realpathSync } from "fs";
 
 class BooksContainer extends Component {
-  constructor(){
+  constructor() {
     super();
     UniqueId.enableUniqueIds(this);
     this.state = {
@@ -23,62 +23,77 @@ class BooksContainer extends Component {
       author: "",
       synopsis: "",
       url: "",
-      data: {}
+      data: {},
+      error: null
     };
-    // console.log(this.state);
-    // this.handleInputChange = this.handleInputChange.bind(this);
-    // this.handleFormSearch = this.handleFormSearch.bind(this);
-    // this.callback = this.callback.bind(this);
-    // this.saveClickHandler = this.saveClickHandler.bind(this);
-    // this.saveBook = this.saveBook.bind(this);
   }
+
+  callback = (res) => {
+    try {
+      console.log("Data:", res)
     
-
-  //Store state variables after api cll returns
-  callback=(res)=>{
-    // console.log();
-    // console.log("API CALL HAS ENDED!");
-    // console.log();
-    // console.log("Res = "+JSON.stringify(res.data.items));
-
-    //books is an array, therefore it must store an array of data
-    this.setState({ books: res.data.items});
-
-    //Output results
-    // console.log();
-    // console.log("RES DATA ITEMS BOOKS = "+JSON.stringify(this.state.books),"ID = "+this.state.id, "TITLE = "+this.state.title, "AUTHOR = "+this.state.author, "DESCRIP = "+this.state.synopsis);
+        this.setState({ 
+          books: res.items,
+          error: null 
+        });
+    } catch (error) {
+      console.error('Error processing response:', error);
+      this.setState({ 
+        books: [],
+        error: "Error processing search results" 
+      });
+    }
   }
-  //Initialize the state variables with search results
-  searchBooks=(query, cb)=>{
+
+  searchBooks = (query, cb) => {
+    console.log("Query:", query)
     API.search(query)
       .then(res => {
-        // console.log("API CALL HAS STARTED!");
-        //callback to store state variables
-        cb(res);//01122019:SaveAndDisplay the Data:
+        cb(res);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.error('Search error:', err);
+      });
   }
 
-  //GETS WHAT IS LOADED IN THE DB (THIS SHOULD BE CALLED ON VIEW)
-  loadBooks=()=>{
-    API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-      )
-      .catch(err => console.log(err));
-  }
+  loadBooks = async () => {
+    try {
+      const res = await API.getBooks();
+      this.setState({ 
+        books: res.data, 
+        title: "", 
+        author: "", 
+        synopsis: "",
+        error: null 
+      });
+    } catch (err) {
+      console.error('Load books error:', err);
+      this.setState({ 
+        error: "Error loading books. Please try again later.",
+        books: [] 
+      });
+    }
+  };
 
-// Saves a book to the database
-  saveBook=(bookData)=>{
-    var filteredData;
-      API.saveBook(bookData)
-      .then(
-        // console.log("BOOKDATA", bookData),
-        // console.log("TEST"),
-        //FILTER OUT THE DATA THAT HAS BEEN SAVED TO THE DATABASE
-        filteredData = this.state.books.filter((eachItem)=>eachItem.id != bookData.bookId),
-        this.setState({books: filteredData})
-        ).catch(err => console.log("ERROR", err));
+  saveBook = (bookData) => {
+    console.log("BookData1:", bookData)
+    API.saveBook(bookData)
+      .then(() => {
+        console.log("BookData2:", bookData)
+        const filteredData = this.state.books.filter(
+          (eachItem) => eachItem.id !== bookData.bookId
+        );
+        this.setState({
+          books: filteredData,
+          error: null
+        });
+      })
+      .catch(err => {
+        console.error('Save book error:', err);
+        this.setState({ 
+          error: "Error saving book" 
+        });
+      });
   }
 
   handleInputChange=(event)=>{
@@ -101,7 +116,7 @@ class BooksContainer extends Component {
     event.preventDefault();
     //Why can't I set the state:
     this.setState({ book: book });
-    //console.log("BOOK = "+JSON.stringify(book));
+    console.log("BOOK = "+JSON.stringify(book));
     //console.log("BOOK = "+JSON.stringify(this.state.book));
     this.saveBook(book);
   }
