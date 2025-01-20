@@ -13,7 +13,7 @@ class DetailContainer extends Component {
   componentDidMount() {
     API.getBook(this.props.match.params.id)
       .then(
-        res => this.setState({ book: res.data }),
+        res => this.setState({ book: res }),
         // console.log("IN Details ID = "+this.props.match.params.id)
         // console.log("Data = "+JSON.stringify(res))
       )
