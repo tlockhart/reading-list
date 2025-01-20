@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Apply Cors middleware to allow requests from all origins
-app.use(cors())
+app.use(cors({origin: 'https://reading-list-frontend.onrender.com/'}))
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
