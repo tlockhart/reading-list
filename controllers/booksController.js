@@ -44,7 +44,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    console.log ("in remove");
+    console.log ("in remove id:", req.params.id);
     db.Book
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
